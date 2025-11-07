@@ -1,14 +1,17 @@
 const mineflayer = require('mineflayer');
 
-const bot = mineflayer.createBot({
-  host: 'asensi.mcsmp.net', // Sunucu IP'si
-  port: 19132,              // Bedrock değilse 25565 yap
-  username: 'BotDeneme123'  // Botun kullanıcı adı
-});
+function startBot() {
+  const bot = mineflayer.createBot({
+    host: "xh1n.aternos.me", // Sunucu IP'si
+    port: 59020,             // Port
+    username: "ShadowAfk",   // Botun ismi
+  });
 
-bot.on('spawn', () => {
-  console.log('✅ Bot sunucuya bağlandı!');
-});
+  bot.on("login", () => console.log("[BOT] Sunucuya giriş yaptı!"));
+  bot.on("end", () => {
+    console.log("Bot koptu, yeniden bağlanıyor...");
+    setTimeout(startBot, 5000);
+  });
+}
 
-bot.on('error', err => console.log('❌ Hata:', err));
-bot.on('end', () => console.log('⛔ Bot bağlantısı kapandı.'));
+startBot();
